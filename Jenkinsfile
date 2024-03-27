@@ -5,11 +5,6 @@ pipeline {
         choice(name: 'TerraformAction', choices: 'Deploy\nDestroy', description: 'Select the action to perform')
     }
 
-    environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-    }
-
     stages {
         stage('Checkout Code') {
             steps {
@@ -47,8 +42,7 @@ pipeline {
             }
             steps {
                 script {
-                        sh 'export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}'
-                        sh 'export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}'
+                        
                         // Deploy resources using Terraform
                         sh 'terraform apply -auto-approve tfplan'
                    
@@ -64,8 +58,7 @@ pipeline {
             }
             steps {
                 script {
-                        sh 'export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}'
-                        sh 'export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}'
+                        
                         // Destroy resources using Terraform with the saved plan
                         sh 'terraform destroy -auto-approve'
                 }
