@@ -1,0 +1,13 @@
+chenged
+
+git status
+
+git add .
+
+git commit -m
+
+git checkout -b br name
+
+git pull
+
+git push
